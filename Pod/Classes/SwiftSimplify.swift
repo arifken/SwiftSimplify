@@ -94,6 +94,14 @@ open class SwiftSimplify {
 	}
 	
 	fileprivate class func simplifyDPStep<T>(_ points: [T], first: Int, last: Int, tolerance: Float, simplified: inout [T]) {
+        // TODO: instead of sending back what we got in if we cant create a range, throw if first+1 >= last
+        guard last > (first + 1) else {
+            for point in points {
+                simplified.append(point)
+            }
+            return
+        }
+        
 		var maxSqDistance = tolerance
 		var index = 0
 		
